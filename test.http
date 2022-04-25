@@ -1,0 +1,26 @@
+#POST CONFIG
+POST http://localhost:5000/config/
+Content-Type: application/json
+
+{
+  "entries": {
+    "test1": "test1",
+    "test2": "test2"
+  }
+}
+
+### GET CONFIGS
+GET http://localhost:5000/config/
+Content-Type: application/json
+
+### GET SINGLE CONFIG
+GET http://localhost:5000/config/513da8c5-5f3e-4fc6-a161-f9cc95dc709d/
+Content-Type: application/json
+
+### GET SINGLE CONFIG NOT EXISTING
+GET http://localhost:5000/config/testnotfound41234123/
+Content-Type: application/json
+
+### DELETE SINGLE CONFIG
+DELETE http://localhost:5000/config/ac7de8a8-6dcf-47e3-9ae3-0b40a87d6c4c/
+Content-Type: application/json

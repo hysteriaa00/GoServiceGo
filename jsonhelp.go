@@ -7,11 +7,11 @@ import (
 	"net/http"
 )
 
-func decodeBody(r io.Reader) (*RequestPost, error) {
+func decodeBody(r io.Reader) (*OurConfig, error) {
 	dec := json.NewDecoder(r)
 	dec.DisallowUnknownFields()
 
-	var rt RequestPost
+	var rt OurConfig
 	if err := dec.Decode(&rt); err != nil {
 		return nil, err
 	}

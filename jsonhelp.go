@@ -2,16 +2,27 @@ package main
 
 import (
 	"encoding/json"
-	"github.com/google/uuid"
 	"io"
 	"net/http"
+
+	"github.com/google/uuid"
 )
 
-func decodeBody(r io.Reader) (*OurConfig, error) {
+func decodeConfigBody(r io.Reader) (*Config, error) {
 	dec := json.NewDecoder(r)
 	dec.DisallowUnknownFields()
 
-	var rt OurConfig
+	var rt Config
+	if err := dec.Decode(&rt); err != nil {
+		return nil, err
+	}
+	return &rt, nil
+}
+
+func decodeConfigGroupBody(r io.Reader) (*ConfigGroup, error) {
+	dec := json.NewDecoder(r)
+	dec.DisallowUnknownFields()
+	var rt ConfigGroup
 	if err := dec.Decode(&rt); err != nil {
 		return nil, err
 	}

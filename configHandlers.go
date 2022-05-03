@@ -2,12 +2,13 @@ package main
 
 import (
 	"errors"
-	"github.com/gorilla/mux"
 	"mime"
 	"net/http"
+
+	"github.com/gorilla/mux"
 )
 
-func (service *OurService) createConfigHandler(w http.ResponseWriter, req *http.Request) {
+func (configService *ConfigService) createConfigHandler(w http.ResponseWriter, req *http.Request) {
 	contentType := req.Header.Get("Content-Type")
 	mediatype, _, err := mime.ParseMediaType(contentType)
 	if err != nil {
@@ -16,12 +17,12 @@ func (service *OurService) createConfigHandler(w http.ResponseWriter, req *http.
 	}
 
 	if mediatype != "application/json" {
-		err := errors.New("Expect application/json Content-Type")
+		err := errors.New("expect application/json Content-Type")
 		http.Error(w, err.Error(), http.StatusUnsupportedMediaType)
 		return
 	}
 
-	rt, err := decodeBody(req.Body)
+	rt, err := decodeConfigBody(req.Body)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
@@ -29,22 +30,23 @@ func (service *OurService) createConfigHandler(w http.ResponseWriter, req *http.
 
 	id := createId()
 	rt.Id = id
-	service.Data[id] = rt
+	configService.Data[id] = rt
+	w.WriteHeader(http.StatusCreated)
 	renderJSON(w, rt)
 }
 
-func (service *OurService) getAllHandler(w http.ResponseWriter, req *http.Request) {
-	allConfigs := []*OurConfig{}
-	for _, v := range service.Data {
+func (configService *ConfigService) getAllConfigHandler(w http.ResponseWriter, req *http.Request) {
+	allConfigs := []*Config{}
+	for _, v := range configService.Data {
 		allConfigs = append(allConfigs, v)
 	}
 
 	renderJSON(w, allConfigs)
 }
 
-func (service *OurService) getConfigHandler(w http.ResponseWriter, req *http.Request) {
+func (configService *ConfigService) getConfigHandler(w http.ResponseWriter, req *http.Request) {
 	id := mux.Vars(req)["id"]
-	config, ok := service.Data[id]
+	config, ok := configService.Data[id]
 	if !ok {
 		err := errors.New("key not found")
 		http.Error(w, err.Error(), http.StatusNotFound)
@@ -53,10 +55,10 @@ func (service *OurService) getConfigHandler(w http.ResponseWriter, req *http.Req
 	renderJSON(w, config)
 }
 
-func (service *OurService) delConfigHandler(w http.ResponseWriter, req *http.Request) {
+func (configService *ConfigService) delConfigHandler(w http.ResponseWriter, req *http.Request) {
 	id := mux.Vars(req)["id"]
-	if v, ok := service.Data[id]; ok {
-		delete(service.Data, id)
+	if v, ok := configService.Data[id]; ok {
+		delete(configService.Data, id)
 		renderJSON(w, v)
 	} else {
 		err := errors.New("key not found")

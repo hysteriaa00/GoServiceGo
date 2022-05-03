@@ -1,0 +1,627 @@
+{
+	"info": {
+		"_postman_id": "fbb65ae5-e41e-4440-b739-4d7f48b7832d",
+		"name": "ARS Service Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "getAllConfig",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://a6886f55-9dbd-4612-8975-0515fca17f17.mock.pstmn.io/config",
+					"protocol": "https",
+					"host": [
+						"a6886f55-9dbd-4612-8975-0515fca17f17",
+						"mock",
+						"pstmn",
+						"io"
+					],
+					"path": [
+						"config"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "getAllConfig",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://6e875c55-87bb-40e5-a77a-d6cb17e1566d.mock.pstmn.io/config",
+							"protocol": "https",
+							"host": [
+								"6e875c55-87bb-40e5-a77a-d6cb17e1566d",
+								"mock",
+								"pstmn",
+								"io"
+							],
+							"path": [
+								"config"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": [],
+					"cookie": [],
+					"body": "[\r\n    {\r\n        \"id\": 1,\r\n        \"entries\": {\r\n            \"test1\": \"test1\",\r\n            \"test2\": \"test2\"\r\n        }\r\n    },\r\n    {\r\n        \"id\": 2,\r\n        \"entries\": {\r\n            \"test1\": \"test1\",\r\n            \"test2\": \"test2\"\r\n        }\r\n    }\r\n]"
+				}
+			]
+		},
+		{
+			"name": "getConfigById",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://a6886f55-9dbd-4612-8975-0515fca17f17.mock.pstmn.io/config/1",
+					"protocol": "https",
+					"host": [
+						"a6886f55-9dbd-4612-8975-0515fca17f17",
+						"mock",
+						"pstmn",
+						"io"
+					],
+					"path": [
+						"config",
+						"1"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "getConfigById",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://6e875c55-87bb-40e5-a77a-d6cb17e1566d.mock.pstmn.io/config/1",
+							"protocol": "https",
+							"host": [
+								"6e875c55-87bb-40e5-a77a-d6cb17e1566d",
+								"mock",
+								"pstmn",
+								"io"
+							],
+							"path": [
+								"config",
+								"1"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": [],
+					"cookie": [],
+					"body": "{\r\n    \"id\": 1,\r\n    \"entries\": {\r\n        \"test1\": \"test1\",\r\n        \"test2\": \"test2\"\r\n    }\r\n}"
+				}
+			]
+		},
+		{
+			"name": "createConfig",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 3,\r\n        \"entries\": {\r\n        \"test1\": \"test1\",\r\n        \"test2\": \"test2\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://a6886f55-9dbd-4612-8975-0515fca17f17.mock.pstmn.io/config",
+					"protocol": "https",
+					"host": [
+						"a6886f55-9dbd-4612-8975-0515fca17f17",
+						"mock",
+						"pstmn",
+						"io"
+					],
+					"path": [
+						"config"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "createConfig",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 3,\r\n        \"entries\": {\r\n        \"test1\": \"test1\",\r\n        \"test2\": \"test2\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://b39e87bb-cd5c-40dc-8c17-dc18905f0830.mock.pstmn.io/config",
+							"protocol": "https",
+							"host": [
+								"b39e87bb-cd5c-40dc-8c17-dc18905f0830",
+								"mock",
+								"pstmn",
+								"io"
+							],
+							"path": [
+								"config"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 201,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Tue, 03 May 2022 12:45:06 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "0"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Server",
+							"value": "nginx"
+						},
+						{
+							"key": "x-srv-trace",
+							"value": "v=1;t=70fbc7b8cbddc194"
+						},
+						{
+							"key": "x-srv-span",
+							"value": "v=1;s=ddd8333e94788887"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "120"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "119"
+						},
+						{
+							"key": "X-RateLimit-Reset",
+							"value": "1651581966"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"0-2jmj7l5rSw0yVb/vlWAYkK/YBwk\""
+						}
+					],
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "deleteConfig",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://a6886f55-9dbd-4612-8975-0515fca17f17.mock.pstmn.io/config/1",
+					"protocol": "https",
+					"host": [
+						"a6886f55-9dbd-4612-8975-0515fca17f17",
+						"mock",
+						"pstmn",
+						"io"
+					],
+					"path": [
+						"config",
+						"1"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "deleteConfig",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "Text",
+					"header": [],
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "getAllGroupConfig",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://a6886f55-9dbd-4612-8975-0515fca17f17.mock.pstmn.io/config",
+					"protocol": "https",
+					"host": [
+						"a6886f55-9dbd-4612-8975-0515fca17f17",
+						"mock",
+						"pstmn",
+						"io"
+					],
+					"path": [
+						"config"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "getAllConfig",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://6e875c55-87bb-40e5-a77a-d6cb17e1566d.mock.pstmn.io/config",
+							"protocol": "https",
+							"host": [
+								"6e875c55-87bb-40e5-a77a-d6cb17e1566d",
+								"mock",
+								"pstmn",
+								"io"
+							],
+							"path": [
+								"config"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": 1,\n        \"items\": [\n            {\n                \"id\": 1,\n                \"entries\": {\n                    \"test1\": \"test1\",\n                    \"test2\": \"test2\"\n                }\n            },\n            {\n                \"id\": 2,\n                \"entries\": {\n                    \"test1\": \"test1\",\n                    \"test2\": \"test2\"\n                }\n            }\n        ]\n    },\n    {\n        \"id\": 2,\n        \"items\": [\n            {\n                \"id\": 1,\n                \"entries\": {\n                    \"test1\": \"test1\",\n                    \"test2\": \"test2\"\n                }\n            },\n            {\n                \"id\": 2,\n                \"entries\": {\n                    \"test1\": \"test1\",\n                    \"test2\": \"test2\"\n                }\n            }\n        ]\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "getConfigGroupById",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://a6886f55-9dbd-4612-8975-0515fca17f17.mock.pstmn.io/config/1",
+					"protocol": "https",
+					"host": [
+						"a6886f55-9dbd-4612-8975-0515fca17f17",
+						"mock",
+						"pstmn",
+						"io"
+					],
+					"path": [
+						"config",
+						"1"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "getConfigById",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://6e875c55-87bb-40e5-a77a-d6cb17e1566d.mock.pstmn.io/config/1",
+							"protocol": "https",
+							"host": [
+								"6e875c55-87bb-40e5-a77a-d6cb17e1566d",
+								"mock",
+								"pstmn",
+								"io"
+							],
+							"path": [
+								"config",
+								"1"
+							]
+						}
+					},
+					"_postman_previewlanguage": "json",
+					"header": [],
+					"cookie": [],
+					"body": "{\n    \"id\": 1,\n    \"items\": [\n        {\n            \"id\": 1,\n            \"entries\": {\n                \"test1\": \"test1\",\n                \"test2\": \"test2\"\n            }\n        },\n        {\n            \"id\": 2,\n            \"entries\": {\n                \"test1\": \"test1\",\n                \"test2\": \"test2\"\n            }\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "createGroupConfig",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 3,\r\n    \"items\": [\r\n        {\r\n            \"id\": 1,\r\n            \"entries\": {\r\n                \"test1\": \"test1\",\r\n                \"test2\": \"test2\"\r\n            }\r\n        },\r\n        {\r\n            \"id\": 2,\r\n            \"entries\": {\r\n                \"test1\": \"test1\",\r\n                \"test2\": \"test2\"\r\n            }\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://a6886f55-9dbd-4612-8975-0515fca17f17.mock.pstmn.io/config",
+					"protocol": "https",
+					"host": [
+						"a6886f55-9dbd-4612-8975-0515fca17f17",
+						"mock",
+						"pstmn",
+						"io"
+					],
+					"path": [
+						"config"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "createConfig",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 3,\r\n        \"entries\": {\r\n        \"test1\": \"test1\",\r\n        \"test2\": \"test2\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://b39e87bb-cd5c-40dc-8c17-dc18905f0830.mock.pstmn.io/config",
+							"protocol": "https",
+							"host": [
+								"b39e87bb-cd5c-40dc-8c17-dc18905f0830",
+								"mock",
+								"pstmn",
+								"io"
+							],
+							"path": [
+								"config"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 201,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Tue, 03 May 2022 12:45:06 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "0"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Server",
+							"value": "nginx"
+						},
+						{
+							"key": "x-srv-trace",
+							"value": "v=1;t=70fbc7b8cbddc194"
+						},
+						{
+							"key": "x-srv-span",
+							"value": "v=1;s=ddd8333e94788887"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "120"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "119"
+						},
+						{
+							"key": "X-RateLimit-Reset",
+							"value": "1651581966"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"0-2jmj7l5rSw0yVb/vlWAYkK/YBwk\""
+						}
+					],
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "deleteGroupConfig",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://a6886f55-9dbd-4612-8975-0515fca17f17.mock.pstmn.io/configgroup/1",
+					"protocol": "https",
+					"host": [
+						"a6886f55-9dbd-4612-8975-0515fca17f17",
+						"mock",
+						"pstmn",
+						"io"
+					],
+					"path": [
+						"configgroup",
+						"1"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "deleteConfig",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "Text",
+					"header": [],
+					"cookie": [],
+					"body": ""
+				}
+			]
+		}
+	]
+}

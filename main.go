@@ -2,13 +2,14 @@ package main
 
 import (
 	"context"
-	"github.com/gorilla/mux"
 	"log"
 	"net/http"
 	"os"
 	"os/signal"
 	"syscall"
 	"time"
+
+	"github.com/gorilla/mux"
 )
 
 func main() {
@@ -18,17 +19,26 @@ func main() {
 	router := mux.NewRouter()
 	router.StrictSlash(true)
 
-	server := OurService{
-		Data: map[string]*OurConfig{},
+	configService := ConfigService{
+		Data: map[string]*Config{},
 	}
 
-	router.HandleFunc("/config/", server.createConfigHandler).Methods("POST")
-	router.HandleFunc("/config/", server.getAllHandler).Methods("GET")
-	router.HandleFunc("/config/{id}/", server.getConfigHandler).Methods("GET")
-	router.HandleFunc("/config/{id}/", server.delConfigHandler).Methods("DELETE")
+	router.HandleFunc("/config/", configService.createConfigHandler).Methods("POST")
+	router.HandleFunc("/config/", configService.getAllConfigHandler).Methods("GET")
+	router.HandleFunc("/config/{id}", configService.getConfigHandler).Methods("GET")
+	router.HandleFunc("/config/{id}", configService.delConfigHandler).Methods("DELETE")
+
+	configGroupService := ConfigGroupService{
+		Data: map[string]*ConfigGroup{},
+	}
+
+	router.HandleFunc("/configgroup/", configGroupService.createConfigGroupHandler).Methods("POST")
+	router.HandleFunc("/configgroup/", configGroupService.getAllConfigGroupHandler).Methods("GET")
+	router.HandleFunc("/configgroup/{id}", configGroupService.getConfigGroupHandler).Methods("GET")
+	router.HandleFunc("/configgroup/{id}", configGroupService.delConfigGroupHandler).Methods("DELETE")
 
 	// start server
-	srv := &http.Server{Addr: "0.0.0.0:5000", Handler: router}
+	srv := &http.Server{Addr: "127.0.0.1:5000", Handler: router}
 	go func() {
 		log.Println("server starting")
 		if err := srv.ListenAndServe(); err != nil {
@@ -40,7 +50,7 @@ func main() {
 
 	<-quit
 
-	log.Println("service shutting down ...")
+	log.Println("configService shutting down ...")
 
 	// gracefully stop server
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)

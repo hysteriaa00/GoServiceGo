@@ -1,6 +1,7 @@
 package main
 
 import (
+	"WebService/db"
 	"context"
 	"log"
 	"net/http"
@@ -19,8 +20,13 @@ func main() {
 	router := mux.NewRouter()
 	router.StrictSlash(true)
 
-	configService := ConfigService{
-		Data: map[string]*Config{},
+	store, err := db.New()
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	configService := postServer{
+		store: store,
 	}
 
 	router.HandleFunc("/config/", configService.createConfigHandler).Methods("POST")
@@ -28,14 +34,14 @@ func main() {
 	router.HandleFunc("/config/{id}/{version}", configService.getConfigHandler).Methods("GET")
 	router.HandleFunc("/config/{id}/{version}", configService.delConfigHandler).Methods("DELETE")
 
-	configGroupService := ConfigGroupService{
-		Data: map[string]*ConfigGroup{},
-	}
+	//configGroupService := db.ConfigGroupService{
+	//	Data: map[string]*db.ConfigGroup{},
+	//}
 
-	router.HandleFunc("/configgroup/", configGroupService.createConfigGroupHandler).Methods("POST")
-	router.HandleFunc("/configgroup/", configGroupService.getAllConfigGroupHandler).Methods("GET")
-	router.HandleFunc("/configgroup/{id}", configGroupService.getConfigGroupHandler).Methods("GET")
-	router.HandleFunc("/configgroup/{id}", configGroupService.delConfigGroupHandler).Methods("DELETE")
+	//	router.HandleFunc("/configgroup/", configGroupService.createConfigGroupHandler).Methods("POST")
+	//	router.HandleFunc("/configgroup/", configGroupService.getAllConfigGroupHandler).Methods("GET")
+	//	router.HandleFunc("/configgroup/{id}", configGroupService.getConfigGroupHandler).Methods("GET")
+	//	router.HandleFunc("/configgroup/{id}", configGroupService.delConfigGroupHandler).Methods("DELETE")
 
 	// start server
 

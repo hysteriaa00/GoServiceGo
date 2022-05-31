@@ -1,6 +1,7 @@
 package main
 
 import (
+	"WebService/db"
 	"encoding/json"
 	"io"
 	"net/http"
@@ -8,21 +9,21 @@ import (
 	"github.com/google/uuid"
 )
 
-func decodeConfigBody(r io.Reader) (*Config, error) {
+func decodeConfigBody(r io.Reader) (*db.Config, error) {
 	dec := json.NewDecoder(r)
 	dec.DisallowUnknownFields()
 
-	var rt Config
+	var rt db.Config
 	if err := dec.Decode(&rt); err != nil {
 		return nil, err
 	}
 	return &rt, nil
 }
 
-func decodeConfigGroupBody(r io.Reader) (*ConfigGroup, error) {
+func decodeConfigGroupBody(r io.Reader) (*db.ConfigGroup, error) {
 	dec := json.NewDecoder(r)
 	dec.DisallowUnknownFields()
-	var rt ConfigGroup
+	var rt db.ConfigGroup
 	if err := dec.Decode(&rt); err != nil {
 		return nil, err
 	}

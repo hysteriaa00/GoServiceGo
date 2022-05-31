@@ -1,6 +1,7 @@
 package main
 
 import (
+	"WebService/db"
 	"errors"
 	"mime"
 	"net/http"
@@ -8,7 +9,11 @@ import (
 	"github.com/gorilla/mux"
 )
 
-func (configService *ConfigService) createConfigHandler(w http.ResponseWriter, req *http.Request) {
+type postServer struct {
+	store *db.PostStore
+}
+
+func (configService *postServer) createConfigHandler(w http.ResponseWriter, req *http.Request) {
 	contentType := req.Header.Get("Content-Type")
 	mediatype, _, err := mime.ParseMediaType(contentType)
 	if err != nil {
@@ -28,58 +33,47 @@ func (configService *ConfigService) createConfigHandler(w http.ResponseWriter, r
 		return
 	}
 
-	id := createId()
-	rt.Id = id
-	configService.Data[id] = rt
-	version := "v"
-	rt.Version = version
-	configService.Data[version] = rt
-
-	w.WriteHeader(http.StatusCreated)
-	renderJSON(w, rt)
-}
-
-func (configService *ConfigService) getAllConfigHandler(w http.ResponseWriter, req *http.Request) {
-	allConfigs := []*Config{}
-	for _, v := range configService.Data {
-		allConfigs = append(allConfigs, v)
+	cfg, err := configService.store.Post(rt)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
 	}
 
-	renderJSON(w, allConfigs)
+	renderJSON(w, cfg)
 }
 
-func (configService *ConfigService) getConfigHandler(w http.ResponseWriter, req *http.Request) {
+func (configService *postServer) getAllConfigHandler(w http.ResponseWriter, req *http.Request) {
+	allConfigs, err := configService.store.GetAll()
+
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+
+		renderJSON(w, allConfigs)
+	}
+}
+
+func (configService *postServer) getConfigHandler(w http.ResponseWriter, req *http.Request) {
 	id := mux.Vars(req)["id"]
 	version := mux.Vars(req)["version"]
-	config, ok := configService.Data[id]
-	config, ver := configService.Data[version]
-	if !ok {
+	cfg, err := configService.store.Get(id, version)
+
+	if err != nil {
 		err := errors.New("key not found")
 		http.Error(w, err.Error(), http.StatusNotFound)
 		return
 	}
-	if !ver {
-		err := errors.New("version not found")
+	renderJSON(w, cfg)
+}
+
+func (configService *postServer) delConfigHandler(w http.ResponseWriter, req *http.Request) {
+	id := mux.Vars(req)["id"]
+	version := mux.Vars(req)["version"]
+	cfg, ok := configService.store.Delete(id, version)
+	if ok != nil {
+		err := errors.New("key not found")
 		http.Error(w, err.Error(), http.StatusNotFound)
 		return
 	}
-	renderJSON(w, config)
-}
-
-func (configService *ConfigService) delConfigHandler(w http.ResponseWriter, req *http.Request) {
-	id := mux.Vars(req)["id"]
-	version := mux.Vars(req)["version"]
-	v := configService.Data[version]
-	if v.Version == version {
-		if v, ok := configService.Data[id]; ok {
-			delete(configService.Data, id)
-			renderJSON(w, v)
-		} else if !ok {
-			err := errors.New("key not found")
-			http.Error(w, err.Error(), http.StatusNotFound)
-		} else {
-			err := errors.New("version not found")
-			http.Error(w, err.Error(), http.StatusInternalServerError)
-		}
-	}
+	renderJSON(w, cfg)
 }

@@ -5,10 +5,9 @@ Content-Type: application/json
 {
   "entries": {
     "test1": "test1",
-    "test2": "test2",
-    "version": "vv"
-  }
-
+    "test2": "test2"
+  },
+  "version": "v1"
 }
 
 ### GET CONFIGS
@@ -16,7 +15,7 @@ GET http://localhost:5000/config/
 Content-Type: application/json
 
 ### GET SINGLE CONFIG
-GET http://localhost:5000/config/808764a5-9fe5-4c91-ac2b-abbe69a79fe1/vv
+GET http://localhost:5000/config/70fbb986-068a-425a-b60e-b2682279106a/v1
 Content-Type: application/json
 
 ### GET SINGLE CONFIG NOT EXISTING
@@ -24,5 +23,5 @@ GET http://localhost:5000/config/testnotfound41234123/
 Content-Type: application/json
 
 ### DELETE SINGLE CONFIG
-DELETE http://localhost:5000/config/808764a5-9fe5-4c91-ac2b-abbe69a79fe1/vv
+DELETE http://localhost:5000/config/70fbb986-068a-425a-b60e-b2682279106a/v1
 Content-Type: application/json

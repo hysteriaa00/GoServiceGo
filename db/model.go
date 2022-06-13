@@ -11,7 +11,7 @@ type ConfigGroupService struct {
 type Config struct {
 	Id      string            `json:"id"`
 	Entries map[string]string `json:"entries"`
-	//Version string            `json:"version"`
+	Version string            `json:"version"`
 }
 
 type ConfigGroup struct {

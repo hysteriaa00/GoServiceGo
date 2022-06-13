@@ -3,6 +3,7 @@ package main
 import (
 	"WebService/db"
 	"errors"
+	"fmt"
 	"mime"
 	"net/http"
 
@@ -54,6 +55,8 @@ func (configService *postServer) getAllConfigHandler(w http.ResponseWriter, req 
 }
 
 func (configService *postServer) getConfigHandler(w http.ResponseWriter, req *http.Request) {
+	fmt.Println(req)
+
 	id := mux.Vars(req)["id"]
 	version := mux.Vars(req)["version"]
 	cfg, err := configService.store.Get(id, version)
@@ -63,6 +66,7 @@ func (configService *postServer) getConfigHandler(w http.ResponseWriter, req *ht
 		http.Error(w, err.Error(), http.StatusNotFound)
 		return
 	}
+
 	renderJSON(w, cfg)
 }
 

@@ -6,19 +6,23 @@ import (
 )
 
 const (
-	posts           = "posts/%s"
-	all             = "posts"
+	config          = "config/%s"
+	all             = "config"
 	configIdVersion = "config/%s/%s"
 )
 
 func generateKey() (string, string) {
 	id := uuid.New().String()
-	return fmt.Sprintf(posts, id), id
+	return fmt.Sprintf(config, id), id
 }
-
-func ccfgIdVer(id string, version string) string {
+func createNewConfigWithVersionKey(version string) (string, string) {
+	id := uuid.New().String()
+	return fmt.Sprintf(configIdVersion, id, version), id
+}
+func createConfigWithIdAndVersionKey(id string, version string) string {
 	return fmt.Sprintf(configIdVersion, id, version)
 }
+
 func constructKey(id string) string {
-	return fmt.Sprintf(posts, id)
+	return fmt.Sprintf(config, id)
 }

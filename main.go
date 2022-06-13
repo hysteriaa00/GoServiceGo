@@ -18,13 +18,12 @@ func main() {
 	signal.Notify(quit, os.Interrupt, syscall.SIGTERM)
 
 	router := mux.NewRouter()
-	router.StrictSlash(true)
+	//router.StrictSlash(true)
 
 	store, err := db.New()
 	if err != nil {
 		log.Fatal(err)
 	}
-
 	configService := postServer{
 		store: store,
 	}
